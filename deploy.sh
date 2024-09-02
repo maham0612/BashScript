@@ -1,9 +1,15 @@
 #!/bin/bash
 
 echo "## Welcome to deployment ##"
-sudo apt install nginx -y
-systemctl start nginx
+if dpkg -l | grep -qw nginx; then
+     echo "Nginx is already installed"
+else
+     echo "Nginx is not installed.Installing nginx..."
+     sudo apt install nginx -y
+     systemctl start nginx
+fi
 systemctl status nginx --no-pager
+
 if [ ! -d "/home/maham/iac_web/maham_iac/" ]; then
     cd /home/maham/iac_web/	
     echo "Cloning the repository..."
