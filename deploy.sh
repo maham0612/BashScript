@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "## Welcome to deployment ##"
-sudo apt install nginx
+sudo apt install nginx -y
 systemctl start nginx
 systemctl status nginx --no-pager
 if [ ! -d "/home/maham/iac_web/maham_iac/" ]; then
