@@ -1,28 +1,17 @@
-#!/bin/bash
-set -e
-repo_dir="/home/maham/test/"
-repo_url="https://github.com/maham0612/test.git"
-github_repo="/home/maham/test/test/"
+Docker_username="maham0612"
+img_name="nginx_server"
+nginx_img="nginx"
+# check if image exists locally
+if [ -z "$(sudo docker image ls -q ${Docker_username}/${img_name})" ]; then
+	echo "Image does not exist"
 
-if dpkg -l | grep -qw nginx; then
-	echo "Nginx is already installed"
+        #check if0 image exists remotely
+if sudo docker pull "$Docker_username/$img_name"; then
+        echo "Image exists on docker hub but not locally"
+	#image does not exists remotely
+        else
+                echo "Image does not exists on docker hub"
+        fi
 else
-	echo"Installing Nginx..."
-	sudo apt install nginx
-	systemctl start nginx
+        echo "Images exist locally"
 fi
-systemctl status nginx --no-pager -l
-
-if [ ! -d "$github_repo" ]; then
-	echo "Cloning..."
-	cd /home/maham/test/
-	git clone $repo_url
-	cd $github_repo
-else
-	echo "Pulling..."
-	cd $github_repo
-	git pull
-fi
-sudo cp * /var/www/html/
-echo "End"
-
