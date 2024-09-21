@@ -33,7 +33,7 @@ if [ -z "$(sudo docker image ls -q ${Docker_username}/${img_name})" ]; then
                 echo "Installing git..."
                 sudo docker exec darkvenom apt-get install git -y
 
-                sudo docker exec darkvenom git clone https://maham0612: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@github.com/maham0612/iac_code.git
+                sudo docker exec darkvenom git clone https://github.com/maham0612/iac_code.git
                 echo "Moving Code..."
                 sudo docker exec darkvenom bash -c "cp -r /iac_code/* /usr/share/nginx/html/"
 
