@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Update package list
+sudo apt update
+
+# Install dependencies
+sudo apt install software-properties-common apt-transport-https wget -y
+
+# Import Microsoft GPG key
+wget -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/vscode.gpg
+
+# Add VS Code repository
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main | sudo tee /etc/apt/sources.list.d/vscode.list
+
+# Update package list again
+sudo apt update
+
+# Install VS Code
+sudo apt install code
